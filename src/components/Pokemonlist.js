@@ -8,15 +8,20 @@ class Pokemonlist extends Component {
   };
 
 
+
   componentDidMount() {
     axios.get("https://pokeapi.co/api/v2/pokemon").then((response) => {
       this.setState({ pokemons: response.data.results });
     });
   }
 
+  Capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
 
   render() {
-    return this.state.pokemons.map((pokemon) => <div key={pokemon.name}>{pokemon.name}</div>);
+    return this.state.pokemons.map((pokemon) => <div key={pokemon.name}>{this.Capitalize(pokemon.name)}</div>);
   }
 }
 
