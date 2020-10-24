@@ -34,7 +34,14 @@ class App extends Component {
           </Router>
         </div>
       );
-    } else return <Pokemondetail url={this.state.currentUrl} />;
+    } else return (
+      <div>
+        <Router>
+          <Navbar/>
+        </Router>
+      <Pokemondetail url={this.state.currentUrl} />
+    </div>
+    );
   }
 }
 
