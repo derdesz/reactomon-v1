@@ -6,27 +6,12 @@ const Pokemondetail = (props) => {
   const [id, setId] = useState(null);
   const [height, setHeight] = useState(null);
 
-  // function componentDidMount() {
-  //   axios.get(this.props.url).then((response) => {
-  //     setName(response.data.name);
-  //     setId(response.data.id);
-  //     setHeight(response.data.height);
-  //     // this.setState({
-  //     //   name: response.data.name,
-  //     //   id: response.data.id,
-  //     //   height: response.data.height,
-  //     // });
-  //   });
-  // }
-
   useEffect(() => {
-    axios
-      .get(props.url)
-      .then((response) => {
-        setName(response.data.name);
-        setId(response.data.id);
-        setHeight(response.data.height);
-      });
+    axios.get(props.url).then((response) => {
+      setName(response.data.name);
+      setId(response.data.id);
+      setHeight(response.data.height);
+    });
   }, []);
 
   function Capitalize(str) {

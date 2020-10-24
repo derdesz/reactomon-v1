@@ -23,7 +23,12 @@ class App extends Component {
             <Navbar />
             <br />
             <Switch>
-              <Route path="/pokemons" render={(props) => (<Pokemonlist {...props} handleOnClick={this.handleOnClick} />)}/>
+              <Route
+                path="/pokemons"
+                render={(props) => (
+                  <Pokemonlist {...props} handleOnClick={this.handleOnClick} />
+                )}
+              />
               <Route path="/types" component={Typelist} />
             </Switch>
           </Router>
