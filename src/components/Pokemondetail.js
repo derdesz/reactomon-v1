@@ -9,7 +9,6 @@ class Pokemondetail extends Component {
   };
 
   componentDidMount() {
-    console.log("Inside pokedetail" + this.props.url);
     axios.get(this.props.url).then((response) => {
       this.setState({
         name: response.data.name,
