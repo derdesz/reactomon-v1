@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MainApp from "./MainApp";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
   return (
     <div>
-      <Link to="/">Home</Link> |<Link to="/pokemons">Pokemons</Link> | <Link to="/types">Types</Link>
+      <Link to="/" onClick={() => props.handleOnClick("")} >Home</Link> |<Link to="/pokemons" onClick={() => props.handleOnClick("")}>Pokemons</Link> | <Link to="/types" onClick={() => props.handleOnClick("")}>Types</Link>
     </div>
   );
 };
