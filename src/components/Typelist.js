@@ -1,30 +1,36 @@
 import React from 'react';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-class Typelist extends Component {
-    state = {
-        types: []
-    }
+const Typelist = () => {
+    const [types, setTypes] = useState([]);
+    
 
 
-    componentDidMount() {
+    useEffect(() => {
         axios.get('https://pokeapi.co/api/v2/type').then((response) => {
-            this.setState({types: response.data.results})
-        })
-    }
+            setTypes(response.data.results)
+        });
+    }, [])
+
+
+    // componentDidMount() {
+    //     axios.get('https://pokeapi.co/api/v2/type').then((response) => {
+    //         this.setState({types: response.data.results})
+    //     })
+    // }
 
 
 
-    render() {
+    
         return (
-            this.state.types.map((type) => (
-                <div>{type.name}</div>
+            types.map((type) => (
+                <div key={type.name}>{type.name}</div>
             ))
             
         );
-    }
+    
 
 }
 export default Typelist;
