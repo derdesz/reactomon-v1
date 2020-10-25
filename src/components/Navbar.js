@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MainApp from "./MainApp";
 import styled from 'styled-components';
 
 
