@@ -21,6 +21,12 @@ const Button = styled.button`
   border-radius: 2rem;
   background-color: rgba(200 0 126 / 50%);
   margin-top: 10px;
+  outline: none;
+  &:active {
+  background-color: rgba(200 0 126 / 70%);
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
 
 `;
 

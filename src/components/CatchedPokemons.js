@@ -25,6 +25,12 @@ const Button = styled.button`
   border-radius: 1rem;
   background-color: rgba(200 0 126 / 80%);
   margin-left: auto;
+  outline: none;
+  &:active {
+  background-color: rgba(200 0 126 / 70%);
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
 `;
 
 
