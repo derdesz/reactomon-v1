@@ -13,6 +13,17 @@ const Card = styled.div`
   background-color: rgba(200 0 126 / 50%);
 `;
 
+const Button = styled.button`
+  width: 10%;
+  color: white;
+  font-size: 7px;
+  border: none;
+  border-radius: 2rem;
+  background-color: rgba(200 0 126 / 50%);
+  margin-top: 10px;
+
+`;
+
 const Header = styled.h3`
   color: #d32f2f;
   text-align: center;
@@ -21,6 +32,9 @@ const Header = styled.h3`
   border-bottom: 1px solid #ef9a9a;
   background-color: #ffebee;
   padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Content = styled.p`
@@ -61,7 +75,10 @@ const Pokemondetail = (props) => {
 
   return (
     <Card>
-      <Header>Name: {Capitalize(name)}</Header>
+      <Header>
+        Name: {Capitalize(name)}
+        <Button onClick={() => props.clickOnCatch(name)}>Catch!</Button>
+      </Header>
       <Content>
         <div>Id: {id}</div>
         <div>Height: {height}</div>
