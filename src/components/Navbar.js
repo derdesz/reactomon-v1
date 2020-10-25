@@ -32,6 +32,7 @@ const Navbar = (props) => {
       <StyledLink to="/" onClick={() => props.handleOnClick("")}>Home</StyledLink>
       <StyledLink to="/pokemons" onClick={() => props.handleOnClick("")}>Pokemons</StyledLink> 
       <StyledLink to="/types" onClick={() => props.handleOnClick("")}>Types</StyledLink>
+      <StyledLink to="/catched" onClick={() => props.handleOnClick("")}>Catched!</StyledLink>
     </LinkContainer>
   );
 };
