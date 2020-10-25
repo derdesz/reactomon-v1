@@ -15,11 +15,16 @@ const StyledType = styled.div`
   background-color: rgba(81 51 68 / 65%);
 `;
 
+
+
 const CatchedPokemons = (props) => {
     
-  return props.catchedPokemonsList.map((name) => (
-    <StyledType key={name}>{name.charAt(0).toUpperCase() + name.slice(1)}</StyledType>
-  ));
+  if (props.catchedPokemonsList.length > 0) {
+    return props.catchedPokemonsList.map((name) => (
+      <StyledType key={name}>{name.charAt(0).toUpperCase() + name.slice(1)}</StyledType>
+    ));
+  } else return <StyledType>No catched pokemons...</StyledType>
+  
 };
 
 export default CatchedPokemons;
