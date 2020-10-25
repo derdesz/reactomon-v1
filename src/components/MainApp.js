@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import styled from 'styled-components';
 import Navbar from "./Navbar";
 import { useHistory, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Pokemonlist from "./Pokemonlist";
 import Typelist from "./Typelist";
 import Pokemondetail from "./Pokemondetail";
+
+const Containers = styled.div`
+  width: 100%;                 
+  overflow: hidden;            
+  display: flex;                
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
 
 const MainApp = () =>  {
     const [currentPath, setCurrentPath] = useState("");
@@ -41,7 +52,9 @@ const MainApp = () =>  {
                     <Pokemonlist {...props} handleOnClick={handleOnClick} />
                   )}
                 />
-                <Route path="/types" component={Typelist} />
+                <Containers>
+                  <Route path="/types" component={Typelist} />
+                </Containers>
             </Router>
           </div>
         );
