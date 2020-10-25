@@ -13,6 +13,8 @@ const StyledType = styled.div`
   padding: 15px;
   text-align: center;
   background-color: rgba(81 51 68 / 65%);
+  display: flex;
+  
 `;
 
 const Button = styled.button`
@@ -22,10 +24,8 @@ const Button = styled.button`
   border: none;
   border-radius: 1rem;
   background-color: rgba(200 0 126 / 80%);
-  margin-left: 220px;
-
+  margin-left: auto;
 `;
-
 
 
 const CatchedPokemons = (props) => {
@@ -33,7 +33,7 @@ const CatchedPokemons = (props) => {
   if (props.catchedPokemonsList.length > 0) {
     return props.catchedPokemonsList.map((name) => (
       <StyledType key={name}>
-        {name.charAt(0).toUpperCase() + name.slice(1)}
+        <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
         <Button onClick={() => props.clickOnDelete(name)}>X</Button>
       </StyledType>
     ));
