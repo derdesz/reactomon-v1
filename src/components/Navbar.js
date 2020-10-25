@@ -22,6 +22,11 @@ const StyledLink = styled(Link)`
   position: relative;
   border-color: rgba(200, 200, 0, 1);
   background-color: rgba(200 0 126 / 50%);
+  &:active {
+  background-color: rgba(200 0 126 / 70%);
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
   
 `;
 
