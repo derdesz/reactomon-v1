@@ -58,7 +58,7 @@ const Pokemonlist = (props) => {
       >
         {Capitalize(pokemon.name)}
       </StyledLink>
-      <Button>Catch!</Button>
+      <Button onClick={() => props.clickOnCatch(pokemon.name)}>Catch!</Button>
       
     </div>
   ));
