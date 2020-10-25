@@ -3,15 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 100%;                 
-  overflow: hidden;             
-  display: flex;  
-  justify-self: center;
-  margin-top: 30px;
-  
-`;
-
 
 const StyledType = styled.div`
   width: 50%;
