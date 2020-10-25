@@ -10,7 +10,8 @@ const LinkContainer = styled.div`
   flex-wrap: wrap;              
   flex-direction: row;
   justify-content: space-evenly;
-  margin-top: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   
 `;
 
@@ -26,6 +27,11 @@ const StyledLink = styled(Link)`
   padding: 15px;
   text-align: center;
   background-color: rgba(81 51 68 / 65%);
+  &:active {
+  background-color: rgba(200 0 126 / 40%);
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
 `;
 
 const Button = styled.button`
@@ -34,6 +40,12 @@ const Button = styled.button`
   border: none;
   border-radius: 2rem;
   background-color: rgba(200 0 126 / 50%);
+  outline: none;
+  &:active {
+  background-color: rgba(200 0 126 / 70%);
+  box-shadow: 0 2px #666;
+  transform: translateY(1px);
+}
 
 `;
 
@@ -41,7 +53,8 @@ const NextButton = styled.button`
   color: white;
   font-size: 15px;
   border-radius: 2rem;
-  background-color: rgba(200 0 126 / 50%);
+  background-color: rgba(200 0 126 / 80%);
+  outline: none;
 `;
 
 const Pokemonlist = (props) => {
@@ -99,11 +112,11 @@ const Pokemonlist = (props) => {
 
   return (
     <LinkContainer>
-      {content}
       <LinkContainer>
         <NextButton onClick={() => handlePrevious()}> « </NextButton>
         <NextButton onClick={() => handleNext()}> » </NextButton>
       </LinkContainer>
+      {content}
     </LinkContainer>
   );
 };
