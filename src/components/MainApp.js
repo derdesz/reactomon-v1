@@ -3,6 +3,7 @@ import "../App.css";
 import styled from 'styled-components';
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useAlert } from 'react-alert'
 import Pokemonlist from "./Pokemonlist";
 import Typelist from "./Typelist";
 import Pokemondetail from "./Pokemondetail";
@@ -19,11 +20,13 @@ const Containers = styled.div`
 `;
 const catchedPokemonsList = [];
 
-const MainApp = () =>  {
-    const [currentPath, setCurrentPath] = useState("");
-    const [currentUrl, setCurrentUrl] = useState("");
-    const [catchedPokemons, setCatchedPokemons] = useState([]);
 
+const MainApp = () =>  {
+  const alert = useAlert();
+  const [currentPath, setCurrentPath] = useState("");
+  const [currentUrl, setCurrentUrl] = useState("");
+  const [catchedPokemons, setCatchedPokemons] = useState([]);
+    
 
   function handleOnClick(url) {
       if ( url === "") {
@@ -38,9 +41,15 @@ const MainApp = () =>  {
   };
 
   function clickOnCatch (pokemonName) {
-    catchedPokemonsList.push(pokemonName);
+    if (!catchedPokemonsList.includes(pokemonName)) {
+      catchedPokemonsList.push(pokemonName);
     setCatchedPokemons(catchedPokemonsList);
     console.log(pokemonName);
+    } else {
+      alert.show('You already caught that Pokemon!');
+      console.log("jsbksvb");
+    }
+    
   }
 
 
