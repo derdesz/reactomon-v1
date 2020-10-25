@@ -23,9 +23,10 @@ const catchedPokemonsList = [];
 
 const MainApp = () =>  {
   const alert = useAlert();
-  const [currentPath, setCurrentPath] = useState("");
-  const [currentUrl, setCurrentUrl] = useState("");
-  const [catchedPokemons, setCatchedPokemons] = useState([]);
+    const [currentPath, setCurrentPath] = useState("");
+    const [currentUrl, setCurrentUrl] = useState("");
+    const [catchedPokemons, setCatchedPokemons] = useState([]);
+    const [forReload, setForReload] = useState(true);
     
 
   function handleOnClick(url) {
@@ -52,6 +53,17 @@ const MainApp = () =>  {
     
   }
 
+  function clickOnDelete (pokemonName) {
+    const index = catchedPokemonsList.indexOf(pokemonName);
+    if (index > -1) {
+      catchedPokemonsList.splice(index, 1);
+    }
+    console.log(catchedPokemonsList);
+    console.log("DELETE");
+    forReload ? setForReload(false) : setForReload(true);
+    
+  }
+
 
 
   useEffect(() => {
@@ -75,7 +87,7 @@ const MainApp = () =>  {
                   <Route path="/types" component={Typelist} />
                 </Containers>
                 <Containers>
-                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons}/>}/>
+                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons} clickOnDelete={clickOnDelete}/>}/>
                 </Containers>
             </Router>
           </div>
