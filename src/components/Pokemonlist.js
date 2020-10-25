@@ -37,14 +37,48 @@ const Button = styled.button`
 
 `;
 
+const NextButton = styled.button`
+  color: white;
+  font-size: 15px;
+  border-radius: 2rem;
+  background-color: rgba(200 0 126 / 50%);
+`;
+
 const Pokemonlist = (props) => {
   const [pokemons, setPokemons] = useState([]);
+  const [previousUrl, setPreviousUrl] = useState(null);
+  const [nextUrl, setNextUrl] = useState("");
 
   useEffect(() => {
+    console.log("loaded");
     axios.get("https://pokeapi.co/api/v2/pokemon").then((response) => {
       setPokemons(response.data.results);
+      setNextUrl(response.data.next);
+      setPreviousUrl(response.data.previous);
+      // console.log(nextUrl);
     });
   }, []);
+
+ function handleNext() {
+   if (nextUrl !== null) {
+    axios.get(nextUrl).then((response) => {
+      setPokemons(response.data.results);
+      setNextUrl(response.data.next);
+     setPreviousUrl(response.data.previous);
+    })
+   }
+ };
+
+ function handlePrevious() {
+   if (previousUrl !== null) {
+    axios.get(previousUrl).then((response) => {
+      setPokemons(response.data.results);
+      setNextUrl(response.data.next);
+      setPreviousUrl(response.data.previous);
+    })
+   }
+};
+
 
   function Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -66,6 +100,10 @@ const Pokemonlist = (props) => {
   return (
     <LinkContainer>
       {content}
+      <LinkContainer>
+        <NextButton onClick={() => handlePrevious()}> « </NextButton>
+        <NextButton onClick={() => handleNext()}> » </NextButton>
+      </LinkContainer>
     </LinkContainer>
   );
 };
