@@ -45,10 +45,8 @@ const MainApp = () =>  {
     if (!catchedPokemonsList.includes(pokemonName)) {
       catchedPokemonsList.push(pokemonName);
     setCatchedPokemons(catchedPokemonsList);
-    console.log(pokemonName);
     } else {
       alert.show('You already caught that Pokemon!');
-      console.log("jsbksvb");
     }
     
   }
@@ -58,8 +56,6 @@ const MainApp = () =>  {
     if (index > -1) {
       catchedPokemonsList.splice(index, 1);
     }
-    console.log(catchedPokemonsList);
-    console.log("DELETE");
     forReload ? setForReload(false) : setForReload(true);
     
   }
