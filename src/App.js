@@ -1,20 +1,13 @@
-import React from 'react';
-import './App.css';
-import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Pokemonlist from './components/Pokemonlist';
-import Typelist from './components/Typelist';
+import React, { Component } from "react";
+import "./App.css";
+import MainApp from './components/MainApp';
 
-function App() {
-  return (
-    <div className="App">
-        <Router>
-            <Navbar/>
-            <Route path='/pokemons' component={Pokemonlist}/>
-            <Route path='/types' component={Typelist}/>
-        </Router>
-    </div>
-  );
+class App extends Component {
+
+  render() {
+    return <MainApp/>
+  }
+  
 }
 
 export default App;
