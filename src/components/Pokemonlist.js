@@ -28,6 +28,15 @@ const StyledLink = styled(Link)`
   background-color: rgba(81 51 68 / 65%);
 `;
 
+const Button = styled.button`
+  color: white;
+  font-size: 7px;
+  border: none;
+  border-radius: 2rem;
+  background-color: rgba(200 0 126 / 50%);
+
+`;
+
 const Pokemonlist = (props) => {
   const [pokemons, setPokemons] = useState([]);
 
@@ -49,6 +58,7 @@ const Pokemonlist = (props) => {
       >
         {Capitalize(pokemon.name)}
       </StyledLink>
+      <Button>Catch!</Button>
       
     </div>
   ));
