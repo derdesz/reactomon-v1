@@ -8,6 +8,7 @@ import Pokemonlist from "./Pokemonlist";
 import Typelist from "./Typelist";
 import Pokemondetail from "./Pokemondetail";
 import CatchedPokemons from "./CatchedPokemons";
+import axios from "axios";
 
 const Containers = styled.div`
   width: 100%;                 
@@ -42,12 +43,13 @@ const MainApp = () =>  {
   };
 
   function clickOnCatch (pokemonName) {
-    if (!catchedPokemonsList.includes(pokemonName)) {
+      axios.post(`http://localhost:8082/pokemons/catch/${pokemonName}`);
+    /*if (!catchedPokemonsList.includes(pokemonName)) {
       catchedPokemonsList.push(pokemonName);
-    setCatchedPokemons(catchedPokemonsList);
+      setCatchedPokemons(catchedPokemonsList);
     } else {
       alert.show('You already caught that Pokemon!');
-    }
+    }*/
     
   }
 
@@ -60,11 +62,11 @@ const MainApp = () =>  {
     
   }
 
-
-
+/*
   useEffect(() => {
     
   }, [currentUrl])
+*/
 
 
     if (currentUrl === "") {
