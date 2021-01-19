@@ -23,12 +23,10 @@ const catchedPokemonsList = [];
 
 
 const MainApp = () =>  {
-  const alert = useAlert();
+    const alert = useAlert();
     const [currentPath, setCurrentPath] = useState("");
     const [currentUrl, setCurrentUrl] = useState("");
     const [catchedPokemons, setCatchedPokemons] = useState([]);
-    const [forReload, setForReload] = useState(true);
-    
 
   function handleOnClick(url) {
       if ( url === "") {
@@ -40,34 +38,11 @@ const MainApp = () =>  {
         setCurrentPath( path );
       }
     
-  };
+  }
 
   function clickOnCatch (pokemonName) {
       axios.post(`http://localhost:8082/pokemons/catch/${pokemonName}`);
-    /*if (!catchedPokemonsList.includes(pokemonName)) {
-      catchedPokemonsList.push(pokemonName);
-      setCatchedPokemons(catchedPokemonsList);
-    } else {
-      alert.show('You already caught that Pokemon!');
-    }*/
-    
   }
-
-  function clickOnDelete (pokemonName) {
-    const index = catchedPokemonsList.indexOf(pokemonName);
-    if (index > -1) {
-      catchedPokemonsList.splice(index, 1);
-    }
-    forReload ? setForReload(false) : setForReload(true);
-    
-  }
-
-/*
-  useEffect(() => {
-    
-  }, [currentUrl])
-*/
-
 
     if (currentUrl === "") {
         return (
@@ -85,7 +60,7 @@ const MainApp = () =>  {
                   <Route path="/types" component={Typelist} />
                 </Containers>
                 <Containers>
-                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons} clickOnDelete={clickOnDelete}/>}/>
+                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons}/>}/>
                 </Containers>
             </Router>
           </div>
