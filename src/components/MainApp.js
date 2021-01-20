@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../App.css";
 import styled from 'styled-components';
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -8,6 +7,7 @@ import Pokemonlist from "./Pokemonlist";
 import Typelist from "./Typelist";
 import Pokemondetail from "./Pokemondetail";
 import CatchedPokemons from "./CatchedPokemons";
+import FormAddPokemon from "./FormAddPokemon";
 
 const Containers = styled.div`
   width: 100%;                 
@@ -81,6 +81,9 @@ const MainApp = () =>  {
                 />
                 <Containers>
                   <Route path="/types" component={Typelist} />
+                </Containers>
+                <Containers>
+                  <Route path="/add-pokemon" component={FormAddPokemon} />
                 </Containers>
                 <Containers>
                   <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons} clickOnDelete={clickOnDelete}/>}/>
