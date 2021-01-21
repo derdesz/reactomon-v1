@@ -4,6 +4,7 @@ import axios from "axios";
 export default function FormAddPokemon() {
     const [name, setName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    // const [height, setHeight] = useState("");
 
     const handlePokemonNameChange = (event) => {
         setName(event.target.value);
@@ -14,11 +15,16 @@ export default function FormAddPokemon() {
         setImageUrl(event.target.value);
     }
 
+    // const handleHeightChange = (event) => {
+    //     setHeight(event.target.value);
+    // }
+
     const clickOnSubmit = () => {
         // sendPostRequest();
         const newPokemon = {
             name: name,
-            url: imageUrl,
+            // height: height,
+            imageUrl: imageUrl,
         };
         console.log(newPokemon)
         
@@ -42,6 +48,11 @@ export default function FormAddPokemon() {
                         <label>Name</label>
                         <input type="text" name="pokemon-name" placeholder="Pokemon's name" value={name} onChange={handlePokemonNameChange}/>
                     </div>
+{/* 
+                    <div className="field">
+                        <label>Height</label>
+                        <input type="text" name="pokemon-height" placeholder="Pokemon's height" value={height} onChange={handleHeightChange}/>
+                    </div> */}
 
                     <div className="field">
                         <label>Image URL</label>
