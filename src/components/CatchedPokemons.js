@@ -41,7 +41,7 @@ const CatchedPokemons = (props) => {
 
     useEffect(async () => {
         const response = await axios.get(
-            "http://localhost:8082/pokemons/all-caught-pokemons"
+            "http://localhost:8080/caughtpokemons/pokemons/all-caught-pokemons"
         );
         setCaughtPokemons(response.data);
         console.log(response);
@@ -50,7 +50,7 @@ const CatchedPokemons = (props) => {
 
     const clickOnDelete = (pokemonName) => {
         async function makePostRequest() {
-            let res = await axios.post(`http://localhost:8082/pokemons/remove/${pokemonName}`);
+            let res = await axios.post(`http://localhost:8080/caughtpokemons/pokemons/remove/${pokemonName}`);
             forReload ? setForReload(false) : setForReload(true);
         }
         makePostRequest();

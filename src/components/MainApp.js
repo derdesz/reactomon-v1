@@ -42,9 +42,6 @@ const MainApp = () =>  {
   };
 
 
-
-  }
-
   function clickOnCatch (pokemonName) {
       axios.post(`http://localhost:8082/pokemons/catch/${pokemonName}`);
   }
