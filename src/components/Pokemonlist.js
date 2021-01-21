@@ -64,20 +64,37 @@ const Pokemonlist = (props) => {
 
   useEffect(() => {
     console.log("loaded");
-    axios.get("https://pokeapi.co/api/v2/pokemon").then((response) => {
-      setPokemons(response.data.results);
-      setNextUrl(response.data.next);
-      setPreviousUrl(response.data.previous);
-      // console.log(nextUrl);
-    });
+      const originals = "http://localhost:8080/pokemon/pokemons"
+      const added = "http://localhost:8080/pokemon-adder/all-added-pokemons"
+
+      const requestOriginals = axios.get(originals);
+      const requestAdded = axios.get(added);
+
+      axios.all([requestOriginals, requestAdded])
+      .then(axios.spread((...responses) => {
+        console.log(responses[0].data.concat(responses[1].data))
+          setPokemons(responses[0].data.concat(responses[1].data));
+          setNextUrl(pokemons.next);
+          setPreviousUrl(pokemons.previous);
+          console.log(nextUrl);
+ 
+      }))
+
+  //   axios.get("https://pokeapi.co/api/v2/pokemon")
+  //   .then((response) => {
+  //     setPokemons(response.data.results);
+  //     setNextUrl(response.data.next);
+  //     setPreviousUrl(response.data.previous);
+  //     // console.log(nextUrl);
+  //   });
   }, []);
 
  function handleNext() {
    if (nextUrl !== null) {
-    axios.get(nextUrl).then((response) => {
-      setPokemons(response.data.results);
-      setNextUrl(response.data.next);
-     setPreviousUrl(response.data.previous);
+    axios.get(nextUrl).then((responses) => {
+      setPokemons(responses[0].data.concat(responses[1].data));
+      setNextUrl(pokemons.next);
+      setPreviousUrl(pokemons.previous);
     })
    }
  };
