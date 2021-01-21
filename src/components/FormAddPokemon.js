@@ -55,7 +55,7 @@ export default function FormAddPokemon() {
                         <input type="text" name="pokemon-image-url" placeholder="Pokemon's image URL" value={imageUrl} onChange={handleImageUrlChange}/>
                     </div>
 
-                    <button className="ui inverted red button" type="submit" onClick={clickOnSubmit}>Add</button>
+                    <div className="ui inverted red button" onClick={clickOnSubmit}>Add</div>
                 </form>
             </div>
     )
