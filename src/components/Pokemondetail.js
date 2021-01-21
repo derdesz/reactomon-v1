@@ -60,20 +60,8 @@ const Image = styled.image`
   object-fit: cover;
 `;
 
-const Pokemondetail = (props) => {
-  const [name, setName] = useState("");
-  const [id, setId] = useState(null);
-  const [height, setHeight] = useState(null);
-  const [image, setImage] = useState(null);
-
-  useEffect(() => {
-    axios.get(props.url).then((response) => {
-      setName(response.data.name);
-      setId(response.data.id);
-      setHeight(response.data.height);
-      setImage(response.data.sprites.other.dream_world.front_default);
-    });
-  }, []);
+const Pokemondetail = ({pokemonData, clickOnCatch}) => {
+  console.log(pokemonData)
 
   function Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -82,15 +70,15 @@ const Pokemondetail = (props) => {
   return (
     <Card>
       <Header>
-        Name: {Capitalize(name)}
-        <Button onClick={() => props.clickOnCatch(name)}>Catch!</Button>
+        Name: {Capitalize(pokemonData.name)}
+        <Button onClick={() => clickOnCatch(pokemonData.name)}>Catch!</Button>
       </Header>
       <Content>
-        <div>Id: {id}</div>
-        <div>Height: {height}</div>
+        <div>Id: {pokemonData.id}</div>
+        {/* <div>Height: {height}</div> */}
       </Content>
       <Image>
-        <img src={image} />
+        <img src={pokemonData.imageUrl} />
       </Image>
     </Card>
   );

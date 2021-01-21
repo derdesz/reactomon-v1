@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkContainer = styled.div`
-  width: 100%;                 
+  width: 80%;                 
   overflow: hidden;             
   display: flex;  
   flex-wrap: wrap;              
@@ -12,7 +12,8 @@ const LinkContainer = styled.div`
   justify-content: space-evenly;
   margin-top: 5px;
   margin-bottom: 10px;
-  
+  position: relative;
+  margin: auto;
 `;
 
 
@@ -31,12 +32,13 @@ const StyledLink = styled(Link)`
   background-color: rgba(200 0 126 / 40%);
   box-shadow: 0 2px #666;
   transform: translateY(1px);
-}
+  }
+  margin-right: 30px;
 `;
 
 const Button = styled.button`
   color: white;
-  font-size: 7px;
+  font-size: 12px;
   border: none;
   border-radius: 2rem;
   background-color: rgba(200 0 126 / 50%);
@@ -45,8 +47,9 @@ const Button = styled.button`
   background-color: rgba(200 0 126 / 70%);
   box-shadow: 0 2px #666;
   transform: translateY(1px);
-}
-
+  }
+  margin-right: 30px;
+  padding: 3px;
 `;
 
 const NextButton = styled.button`
@@ -72,27 +75,17 @@ const Pokemonlist = (props) => {
 
       axios.all([requestOriginals, requestAdded])
       .then(axios.spread((...responses) => {
-        console.log(responses[0].data.concat(responses[1].data))
-          setPokemons(responses[0].data.concat(responses[1].data));
+          setPokemons((responses[0].data).concat(responses[1].data));
           setNextUrl(pokemons.next);
           setPreviousUrl(pokemons.previous);
-          console.log(nextUrl);
- 
-      }))
-
-  //   axios.get("https://pokeapi.co/api/v2/pokemon")
-  //   .then((response) => {
-  //     setPokemons(response.data.results);
-  //     setNextUrl(response.data.next);
-  //     setPreviousUrl(response.data.previous);
-  //     // console.log(nextUrl);
-  //   });
+          console.log((responses[0].data).concat(responses[1].data))
+      }, []))
   }, []);
 
  function handleNext() {
    if (nextUrl !== null) {
     axios.get(nextUrl).then((responses) => {
-      setPokemons(responses[0].data.concat(responses[1].data));
+      setPokemons((responses[0].data).concat(responses[1].data));
       setNextUrl(pokemons.next);
       setPreviousUrl(pokemons.previous);
     })
@@ -101,10 +94,10 @@ const Pokemonlist = (props) => {
 
  function handlePrevious() {
    if (previousUrl !== null) {
-    axios.get(previousUrl).then((response) => {
-      setPokemons(response.data.results);
-      setNextUrl(response.data.next);
-      setPreviousUrl(response.data.previous);
+    axios.get(previousUrl).then((responses) => {
+      setPokemons((responses[0].data).concat(responses[1].data));
+      setNextUrl(pokemons.next);
+      setPreviousUrl(pokemons.previous);
     })
    }
 };
@@ -117,8 +110,8 @@ const Pokemonlist = (props) => {
   let content = pokemons.map((pokemon) => (
     <div key={pokemon.name}>
       <StyledLink
-        to={"pokemons/" + pokemon.url.substring(34)}
-        onClick={() => props.handleOnClick(pokemon.url)}
+        to={"pokemons/" + pokemon.id}
+        onClick={() => props.handleOnClick(pokemon)}
       >
         {Capitalize(pokemon.name)}
       </StyledLink>
@@ -128,13 +121,16 @@ const Pokemonlist = (props) => {
   ));
 
   return (
-    <LinkContainer>
+    <React.Fragment>
       <LinkContainer>
         <NextButton onClick={() => handlePrevious()}> « </NextButton>
         <NextButton onClick={() => handleNext()}> » </NextButton>
       </LinkContainer>
-      {content}
-    </LinkContainer>
+
+      <LinkContainer>
+        {content}
+      </LinkContainer>
+    </React.Fragment>
   );
 };
 
