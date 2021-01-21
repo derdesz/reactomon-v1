@@ -23,7 +23,7 @@ const catchedPokemonsList = [];
 
 
 const MainApp = () =>  {
-  const alert = useAlert();
+    const alert = useAlert();
     const [currentPath, setCurrentPath] = useState("");
     const [name, setname] = useState("");
     const [catchedPokemons, setCatchedPokemons] = useState([]);
@@ -41,25 +41,16 @@ const MainApp = () =>  {
 
   };
 
-  useEffect(() => {}, [name])
+
+
+  }
 
   function clickOnCatch (pokemonName) {
-    console.log("catch")
+      axios.post(`http://localhost:8082/pokemons/catch/${pokemonName}`);
   }
-
-  function clickOnDelete (pokemonName) {
-    const index = catchedPokemonsList.indexOf(pokemonName);
-    if (index > -1) {
-      catchedPokemonsList.splice(index, 1);
-    }
-    forReload ? setForReload(false) : setForReload(true);
-    
-  }
-
-
-
 
     if (name === "") {
+
         return (
           <div className="App">
             <Router>
@@ -76,6 +67,9 @@ const MainApp = () =>  {
                 </Containers>
                 <Containers>
                   <Route path="/add-pokemon" component={FormAddPokemon} />
+
+                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons}/>}/>
+
                 </Containers>
                 {/* <Containers>
                   <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons} clickOnDelete={clickOnDelete}/>}/>

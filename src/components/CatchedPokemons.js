@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from 'styled-components';
+import axios from "axios";
 
 
 const StyledType = styled.div`
@@ -35,12 +36,31 @@ const Button = styled.button`
 
 
 const CatchedPokemons = (props) => {
+    const [caughtPokemons, setCaughtPokemons] = useState([]);
+    const [forReload, setForReload] = useState(true);
+
+    useEffect(async () => {
+        const response = await axios.get(
+            "http://localhost:8082/pokemons/all-caught-pokemons"
+        );
+        setCaughtPokemons(response.data);
+        console.log(response);
+    }, [forReload]);
+
+
+    const clickOnDelete = (pokemonName) => {
+        async function makePostRequest() {
+            let res = await axios.post(`http://localhost:8082/pokemons/remove/${pokemonName}`);
+            forReload ? setForReload(false) : setForReload(true);
+        }
+        makePostRequest();
+    }
     
-  if (props.catchedPokemonsList.length > 0) {
-    return props.catchedPokemonsList.map((name) => (
-      <StyledType key={name}>
-        <div>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
-        <Button onClick={() => props.clickOnDelete(name)}>X</Button>
+  if (caughtPokemons) {
+    return caughtPokemons.map((pokemon) => (
+      <StyledType key={pokemon.name}>
+        <div>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</div>
+        <Button onClick={() => clickOnDelete(pokemon.name)}>X</Button>
       </StyledType>
     ));
   } else return (
