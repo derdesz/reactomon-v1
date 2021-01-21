@@ -8,6 +8,7 @@ export default function FormAddPokemon() {
     const handlePokemonNameChange = (event) => {
         setName(event.target.value);
         console.log(event.target.value)
+        document.getElementById("successful-save-message").classList.add("hidden")
     }
     const handleImageUrlChange = (event) => {
         setImageUrl(event.target.value);
@@ -24,23 +25,15 @@ export default function FormAddPokemon() {
         axios.post('http://localhost:8080/pokemon-adder/save-new-pokemon', newPokemon, {
         })
         .then(() => {console.log(newPokemon)})
+        .then(() => {
+                document.getElementById("successful-save-message").classList.remove("hidden")
+        })
         .catch(() => {"error"});
-        
-        // setName("");
-        // setImageUrl("");
-
-        // alert("Pokemon saved successfully!");
-
     }
 
-    // const sendPostRequest = async () => {
-
-    //     const resp = await axios.post('http://localhost:8080/pokemons/save-new-pokemon', newPokemon);
-    //     console.log(resp.data);
-
-    // };
 
     return (
+        <React.Fragment>
             <div className="ui inverted segment">
                 <p className="subtitle">Add new pokemon</p>
                 <form className="ui inverted form" name="new-pokemon">
@@ -58,5 +51,7 @@ export default function FormAddPokemon() {
                     <div className="ui inverted red button" onClick={clickOnSubmit}>Add</div>
                 </form>
             </div>
+            <div className="ui green message hidden" id="successful-save-message">New pokemon saved successfully!</div>
+        </React.Fragment>
     )
 }
