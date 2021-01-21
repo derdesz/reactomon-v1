@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../App.css";
 import styled from 'styled-components';
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -8,6 +7,7 @@ import Pokemonlist from "./Pokemonlist";
 import Typelist from "./Typelist";
 import Pokemondetail from "./Pokemondetail";
 import CatchedPokemons from "./CatchedPokemons";
+import FormAddPokemon from "./FormAddPokemon";
 import axios from "axios";
 
 const Containers = styled.div`
@@ -25,43 +25,55 @@ const catchedPokemonsList = [];
 const MainApp = () =>  {
     const alert = useAlert();
     const [currentPath, setCurrentPath] = useState("");
-    const [currentUrl, setCurrentUrl] = useState("");
+    const [name, setname] = useState("");
     const [catchedPokemons, setCatchedPokemons] = useState([]);
-
-  function handleOnClick(url) {
-      if ( url === "") {
-          setCurrentUrl("");
-          setCurrentPath("");
-      } else {
-        setCurrentUrl( url );
-        const path = url.substring(34);
-        setCurrentPath( path );
-      }
+    const [forReload, setForReload] = useState(true);
+    const [pokemonData, setPokemonData] = useState({});
+    const [pokemonId, setPokemonId] = useState("");
     
+
+  const handlePokemonDetailClick = (pokemon) => {
+    console.log(pokemon.name)
+    setPokemonData(pokemon);
+    setname(pokemon.name);
+    setPokemonId(pokemon.id)
+    console.log(pokemonData)
+
+  };
+
+
+
   }
 
   function clickOnCatch (pokemonName) {
       axios.post(`http://localhost:8082/pokemons/catch/${pokemonName}`);
   }
 
-    if (currentUrl === "") {
+    if (name === "") {
+
         return (
           <div className="App">
             <Router>
-              <Navbar handleOnClick={handleOnClick}/>
+              <Navbar/>
               <br />
                 <Route
                   path="/pokemons"
                   render={(props) => (
-                    <Pokemonlist {...props} handleOnClick={handleOnClick} clickOnCatch={clickOnCatch}/>
+                    <Pokemonlist {...props} handleOnClick={handlePokemonDetailClick} clickOnCatch={clickOnCatch}/>
                   )}
                 />
                 <Containers>
                   <Route path="/types" component={Typelist} />
                 </Containers>
                 <Containers>
+                  <Route path="/add-pokemon" component={FormAddPokemon} />
+
                   <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons}/>}/>
+
                 </Containers>
+                {/* <Containers>
+                  <Route path="/catched" render={(props) => <CatchedPokemons {...props} catchedPokemonsList={catchedPokemons} clickOnDelete={clickOnDelete}/>}/>
+                </Containers> */}
             </Router>
           </div>
         );
@@ -69,9 +81,11 @@ const MainApp = () =>  {
         <div className="App">
             <div>
             <Router>
-                <Navbar handleOnClick={handleOnClick}/>
+                <Navbar/>
+                <Containers>
+                      <Pokemondetail pokemonData={pokemonData} clickOnCatch={clickOnCatch}/>
+                </Containers>
             </Router>
-            <Pokemondetail url={currentUrl} clickOnCatch={clickOnCatch}/>
         </div>
       </div>
       );
