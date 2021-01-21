@@ -21,7 +21,8 @@ export default function FormAddPokemon() {
         };
         console.log(newPokemon)
         
-        axios.post("http://localhost:8080/pokemons/save-new-pokemon", newPokemon)
+        axios.post('http://localhost:8080/pokemon-adder/save-new-pokemon', newPokemon, {
+        })
         .then(() => {console.log(newPokemon)})
         .catch(() => {"error"});
         
