@@ -18,7 +18,7 @@ export default function FormAddPokemon() {
         // sendPostRequest();
         const newPokemon = {
             name: name,
-            imageUrl: imageUrl,
+            url: imageUrl,
         };
         console.log(newPokemon)
         
